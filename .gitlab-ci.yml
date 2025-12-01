@@ -1,0 +1,15 @@
+image: $CI_REGISTRY/$CI_PROJECT_PATH-docker:latest
+
+stages:
+  - build
+
+build:
+  stage: build
+  script:
+    - make -C /builds/ws2025rdm/materials clean
+    - make -j1 -C /builds/ws2025rdm/materials all
+  artifacts:
+    paths:
+      - /builds/ws2025rdm/materials/classes/*/*.html
+      - /builds/ws2025rdm/materials/classes/*/*.pdf
+    expire_in: 1 month
